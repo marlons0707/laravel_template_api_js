@@ -1,10 +1,17 @@
 # Laravel Template API JS
+https://github.com/marlons0707/laravel_template_api_js
 
-Este proyecto es una plantilla básica para construir APIs Rest con Laravel. Sigue los pasos a continuación para configurar y ejecutar el proyecto.
+Plantilla básica para construir APIs Rest con Laravel. Incluye: 
+- Autenticación simple y rutas protegidas
+- Uso de Laravel Sanctum para autenticación de usuarios
+- Implementación de Validators, Resources, Seeders y Factories
+- Catálogos de: Usuarios, Unidades de Medida, Categorías y Productos
+
+Sigue los pasos a continuación para configurar y ejecutar el proyecto:
 
 ## Requisitos previos
 
-- PHP **>= 8.1**
+- PHP **>= 8.1** (https://windows.php.net/downloads/releases/)
 - MySQL **5.7+**
 - Composer **v2.2+**
 - Servidor local recomendado: **Laragon**, XAMPP o Docker
@@ -82,7 +89,6 @@ Después de clonar el repositorio, sigue estos pasos para configurar el entorno 
 Este proyecto está bajo la Licencia MIT. 
 
 ## Autor
-Marlon Saravia
+Marlon Saravia - [LinkedIn](https://www.linkedin.com/in/marlons0707/)
 
-```
 
