@@ -1,0 +1,1067 @@
+{
+	"info": {
+		"_postman_id": "7bbf6870-fe2e-4ae9-a8e6-da9cf5a5f06f",
+		"name": "laravel_template_api_js",
+		"description": "API Rest con autenticación simple, para la creación de unidades de medida, categorías y productos.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12308074",
+		"_collection_link": "https://www.postman.com/marlons0707/workspace/example-api-js/collection/12308074-7bbf6870-fe2e-4ae9-a8e6-da9cf5a5f06f?action=share&source=collection_link&creator=12308074"
+	},
+	"item": [
+		{
+			"name": "System",
+			"item": [
+				{
+					"name": "Authentication",
+					"item": [
+						{
+							"name": "Login",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"response =  pm.response.json();\r",
+											"var headerValue = response.token;\r",
+											"pm.globals.set(\"AccessToken\", headerValue);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{AccessToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "marlons",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "email",
+											"value": "marlons0707@gmail.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "12345",
+											"type": "text"
+										},
+										{
+											"key": "password_confirmation",
+											"value": "12345",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "{{EndPoint}}/api/login",
+									"host": [
+										"{{EndPoint}}"
+									],
+									"path": [
+										"api",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Register",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{AccessToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "John Doe",
+											"type": "text"
+										},
+										{
+											"key": "user",
+											"value": "jdoe",
+											"type": "text"
+										},
+										{
+											"key": "mail",
+											"value": "jdoe@gmail.com",
+											"type": "text"
+										},
+										{
+											"key": "role",
+											"value": "admin",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "12345",
+											"type": "text"
+										},
+										{
+											"key": "passwordConfirm",
+											"value": "12345",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{EndPoint}}/api/system/register",
+									"host": [
+										"{{EndPoint}}"
+									],
+									"path": [
+										"api",
+										"system",
+										"register"
+									]
+								},
+								"description": "Bajo esta estructura este servicio funciona sólo para un administrador, ya que el usuario no se podría registrar por si sólo."
+							},
+							"response": []
+						},
+						{
+							"name": "Logout",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{AccessToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "Brad",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "email",
+											"value": "brad@gmail.com",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "password",
+											"value": "12345",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "password_confirmation",
+											"value": "12345",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "{{EndPoint}}/api/system/logout",
+									"host": [
+										"{{EndPoint}}"
+									],
+									"path": [
+										"api",
+										"system",
+										"logout"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Users",
+					"item": [
+						{
+							"name": "List Users",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{AccessToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{EndPoint}}/api/system/users",
+									"host": [
+										"{{EndPoint}}"
+									],
+									"path": [
+										"api",
+										"system",
+										"users"
+									]
+								},
+								"description": "Muestra todos los usuarios creados utilizando paginación y el recurso AuthResource para formatear la información."
+							},
+							"response": []
+						},
+						{
+							"name": "Show User",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{AccessToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{EndPoint}}/api/system/users/11",
+									"host": [
+										"{{EndPoint}}"
+									],
+									"path": [
+										"api",
+										"system",
+										"users",
+										"11"
+									]
+								},
+								"description": "Muestra un usuario según el ID utilizando el recurso AuthResource para formatear la información."
+							},
+							"response": []
+						},
+						{
+							"name": "Update User",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{AccessToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Juan Pérez\",\r\n    \"mail\": \"jperez@gmail.com\",\r\n    \"role\": \"vendor\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{EndPoint}}/api/system/users/10",
+									"host": [
+										"{{EndPoint}}"
+									],
+									"path": [
+										"api",
+										"system",
+										"users",
+										"10"
+									]
+								},
+								"description": "Actualiza la información del usuario (más no la contraseña ni el estado, se usan los otros dos servicios de update)."
+							},
+							"response": []
+						},
+						{
+							"name": "Update User Status",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{AccessToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{EndPoint}}/api/system/users/10/status",
+									"host": [
+										"{{EndPoint}}"
+									],
+									"path": [
+										"api",
+										"system",
+										"users",
+										"10",
+										"status"
+									]
+								},
+								"description": "Es una actualización de tipo Toggle, si está activo lo pasa a inactivo, si está inactivo a activo."
+							},
+							"response": []
+						},
+						{
+							"name": "Update User Password",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{AccessToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"password\": \"12345$\",\r\n    \"passwordConfirm\": \"12345$\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{EndPoint}}/api/system/users/10/password",
+									"host": [
+										"{{EndPoint}}"
+									],
+									"path": [
+										"api",
+										"system",
+										"users",
+										"10",
+										"password"
+									]
+								},
+								"description": "Para cambiar la contraseña de un usuario, pero pensado para que lo haga un admin, no genera tokens ni envía mails. No es self-service."
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Catalogs",
+			"item": [
+				{
+					"name": "Units",
+					"item": [
+						{
+							"name": "List Units",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{AccessToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{EndPoint}}/api/unit?query=ma",
+									"host": [
+										"{{EndPoint}}"
+									],
+									"path": [
+										"api",
+										"unit"
+									],
+									"query": [
+										{
+											"key": "query",
+											"value": "ma"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Units",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{AccessToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Kilo\",\r\n    \"description\": \"Hola mundo, bueno\",\r\n    \"status\": \"Y\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{EndPoint}}/api/unit",
+									"host": [
+										"{{EndPoint}}"
+									],
+									"path": [
+										"api",
+										"unit"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Unit",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{AccessToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Test Yo\",\r\n    \"description\": \"Hola mundo, malo\",\r\n    \"status\": \"N\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{EndPoint}}/api/unit/21",
+									"host": [
+										"{{EndPoint}}"
+									],
+									"path": [
+										"api",
+										"unit",
+										"21"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Show Unit",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{AccessToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{EndPoint}}/api/unit/21",
+									"host": [
+										"{{EndPoint}}"
+									],
+									"path": [
+										"api",
+										"unit",
+										"21"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Unit",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{AccessToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{EndPoint}}/api/unit/21",
+									"host": [
+										"{{EndPoint}}"
+									],
+									"path": [
+										"api",
+										"unit",
+										"21"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Categories",
+					"item": [
+						{
+							"name": "List Categories",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{AccessToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{EndPoint}}/api/category?query=",
+									"host": [
+										"{{EndPoint}}"
+									],
+									"path": [
+										"api",
+										"category"
+									],
+									"query": [
+										{
+											"key": "query",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Show Category",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{AccessToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{EndPoint}}/api/category/1",
+									"host": [
+										"{{EndPoint}}"
+									],
+									"path": [
+										"api",
+										"category",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Categories",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{AccessToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Holis 2 🤣\",\r\n    \"description\": \"Hola mundo\",\r\n    \"status\": \"Y\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{EndPoint}}/api/category",
+									"host": [
+										"{{EndPoint}}"
+									],
+									"path": [
+										"api",
+										"category"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Category",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{AccessToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Herramientas 💻\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{EndPoint}}/api/category/22",
+									"host": [
+										"{{EndPoint}}"
+									],
+									"path": [
+										"api",
+										"category",
+										"22"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Categories",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{AccessToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{EndPoint}}/api/category/7",
+									"host": [
+										"{{EndPoint}}"
+									],
+									"path": [
+										"api",
+										"category",
+										"7"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "CRUD Para categorías de productos"
+				},
+				{
+					"name": "Products",
+					"item": [
+						{
+							"name": "List Products",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{AccessToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{EndPoint}}/api/product?query=",
+									"host": [
+										"{{EndPoint}}"
+									],
+									"path": [
+										"api",
+										"product"
+									],
+									"query": [
+										{
+											"key": "query",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Product",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{AccessToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Vasos\",\r\n    \"category_id\": 2,\r\n    \"unit_id\": 1,\r\n    \"description\": \"Block de marca rino\",\r\n    \"price\": \"2.5\",\r\n    \"cost\": \"5\",\r\n    \"image\": null,\r\n    \"stock\": 105\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{EndPoint}}/api/product",
+									"host": [
+										"{{EndPoint}}"
+									],
+									"path": [
+										"api",
+										"product"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Product",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{AccessToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Test JS\",\r\n    \"category_id\": 2,\r\n    \"location_id\": 2,\r\n    \"unit_id\": 1,\r\n    \"description\": \"Block de marca rino\",\r\n    \"price\": \"2.5\",\r\n    \"cost\": \"1\",\r\n    \"image\": \"IMG/HOLA\",\r\n    \"status\": \"N\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{EndPoint}}/api/product/22",
+									"host": [
+										"{{EndPoint}}"
+									],
+									"path": [
+										"api",
+										"product",
+										"22"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Show Product",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{AccessToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{EndPoint}}/api/product/22",
+									"host": [
+										"{{EndPoint}}"
+									],
+									"path": [
+										"api",
+										"product",
+										"22"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Product",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{AccessToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{EndPoint}}/api/product/1",
+									"host": [
+										"{{EndPoint}}"
+									],
+									"path": [
+										"api",
+										"product",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
